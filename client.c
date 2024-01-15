@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 18:49:51 by midbella          #+#    #+#             */
-/*   Updated: 2024/01/14 23:21:57 by midbella         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:46:16 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 	i = 0;
 	if (ac != 3)
 	{
-		ft_printf("PLEASE ENTER THE SERVER PID AND THE MESSAGE TO SEND\n");
+		ft_print_s("PLEASE ENTER THE SERVER PID AND THE MESSAGE TO SEND\n");
 		return (1);
 	}
 	pid = ft_atoi(av[1]);

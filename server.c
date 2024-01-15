@@ -6,43 +6,35 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 19:14:47 by midbella          #+#    #+#             */
-/*   Updated: 2024/01/14 23:26:46 by midbella         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:45:25 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-struct s_tab	g_block;
+short *block;
 
-void	handel_sig1(int sig)
+void	handler(int sig)
 {
-	sig = 0;
-	g_block.c = g_block.c << 1 | 1;
-	g_block.counter++;
-	if (g_block.counter == 8)
+	*(char *)block = *(char *)block << 1 | (sig == SIGUSR1);
+	*(char *)(block + 1) += 1;
+	if (*(char *)((block + 1)) == 8)
 	{
-		ft_printf("%c", g_block.c);
-		g_block.counter = 0;
-	}
-}
-
-void	handel_sig2(int sig)
-{
-	sig = 0;
-	g_block.c = g_block.c << 1;
-	g_block.counter++;
-	if (g_block.counter == 8)
-	{
-		ft_printf("%c", g_block.c);
-		g_block.counter = 0;
+		write(1, (char *)block, 1);
+		*(char *)((block + 1)) = 0;
 	}
 }
 
 int	main(void)
 {
-	signal(SIGUSR1, handel_sig1);
-	signal(SIGUSR2, handel_sig2);
-	ft_printf("THE PROCESS ID OF THE SERVER => %d <=\n", getpid());
+	short g;
+	g = 0;
+	block = &g;
+	signal(SIGUSR1, handler);
+	signal(SIGUSR2, handler);
+	ft_print_s("THE PROCESS ID OF THE SERVER => ");
+	ft_print_d(getpid()); 
+	ft_print_s(" <=\n");
 	while (1)
 	{
 	}
