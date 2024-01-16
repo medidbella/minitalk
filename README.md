@@ -13,3 +13,6 @@ two signals (SIGUSR1 and SIGUSR2)
 -3 in another terminal run the client program like this (./cleint ("the-server-id" "any message you want to send")
 
 lastly, you will see that the same message is printed in the first terminal where the server is running
+
+if the message printed by the server is different try to increase the value given
+to the usleep function in the "client.c" file make it for example 500
